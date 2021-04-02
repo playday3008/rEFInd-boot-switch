@@ -30,7 +30,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Configure
-      run: apt install -y libefivar-dev
+      run: sudo apt install -y libefivar-dev
     - name: Build
       working-directory: rEFInd-boot-switch
       run: g++ rEFInd-boot-switch.cpp -Wall -lefivar -o rEFInd-boot-switch
