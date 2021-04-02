@@ -4,7 +4,7 @@
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
 #include <windows.h>
 
-constexpr auto bootEntry = "Boot Ubuntu from 107 GiB Btrfs volume"; // To run Linux
+constexpr auto bootEntry = "linux"; // To run Linux
 
 #else
 
@@ -13,7 +13,7 @@ extern "C" {
     #include <efivar/efivar.h>
 }
 
-constexpr auto bootEntry = "Boot Windows 10 from EFI system partition"; // To run Windows
+constexpr auto bootEntry = "windows"; // To run Windows
 #endif
 
 constexpr auto lpName = "PreviousBoot";
