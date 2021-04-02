@@ -4,20 +4,18 @@
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
 #include <windows.h>
 
-constexpr auto bootEntry = "linux"; // To run Linux
-
 #else
 
 #include <unistd.h>
 extern "C" {
     #include <efivar/efivar.h>
 }
-
-constexpr auto bootEntry = "windows"; // To run Windows
 #endif
 
 constexpr auto lpName = "PreviousBoot";
 constexpr auto lpGuid = "{36d08fa7-cf0b-42f5-8f14-68df73ed3740}";
+
+std::string bootEntry;
 
 auto GetNewVarDataForPreviousBoot() -> std::vector<uint8_t>
 {
@@ -128,8 +126,17 @@ auto SetPreviousBootVar()
 
 #endif
 
-auto main() -> int
+auto main(int argc, char** argv) -> int
 {
+    if (argc == 2 && argv[1] != nullptr)
+        bootEntry = argv[1];
+    else {
+        std::cout << "Invalid argument" << std::endl;
+        std::cout << "Press any key to continue..." << std::endl;
+        std::cin.get();
+        return EXIT_FAILURE;
+    }
+
     if (!SetPreviousBootVar()) {
         std::cout << "Press any key to continue..." << std::endl;
         std::cin.get();
