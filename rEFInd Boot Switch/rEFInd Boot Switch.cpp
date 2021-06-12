@@ -3,8 +3,10 @@
 
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
 #include "WinAPI.hpp"
+constexpr auto bootEntry = "Ubuntu";
 #else
 #include "LinuxAPI.hpp"
+constexpr auto bootEntry = "Windows";
 #endif
 
 constexpr auto lpName = "PreviousBoot";
@@ -26,16 +28,6 @@ auto GetNewVarDataForPreviousBoot(const std::string& entry) -> std::vector<uint8
 
 int main(const int argc, char** argv)
 {
-    std::string bootEntry;
-    if (argc == 2 && argv[1] != nullptr)
-        bootEntry = argv[1];
-    else {
-        std::cout << "Invalid argument" << std::endl;
-        std::cout << "Press any key to continue..." << std::endl;
-        std::cin.get();
-        return EXIT_FAILURE;
-    }
-
     if (const auto buffer = GetNewVarDataForPreviousBoot(bootEntry);
         !UpdatePrevBootVar(lpName, lpGuid, buffer)) {
         std::cout << "Press any key to continue..." << std::endl;
