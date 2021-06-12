@@ -32,7 +32,7 @@ jobs:
     - name: Configure
       run: sudo apt install -y libefivar-dev
     - name: Build
-      working-directory: rEFInd-boot-switch
+      working-directory: rEFInd Boot Switch
       run: g++ 'rEFInd Boot Switch.cpp' -Wall -std=c++17 -lefivar -o 'rEFInd Boot Switch'
     - name: Upload
       uses: actions/upload-artifact@v2
