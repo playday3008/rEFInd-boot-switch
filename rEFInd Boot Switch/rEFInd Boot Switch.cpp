@@ -3,10 +3,10 @@
 
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
 #include "WinAPI.hpp"
-constexpr auto bootEntry = "Ubuntu";
+constexpr auto bootEntry = "linux";
 #else
 #include "LinuxAPI.hpp"
-constexpr auto bootEntry = "Windows";
+constexpr auto bootEntry = "windows";
 #endif
 
 constexpr auto lpName = "PreviousBoot";
