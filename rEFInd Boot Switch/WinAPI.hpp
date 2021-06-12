@@ -47,7 +47,7 @@ inline auto UpdatePrevBootVar(const std::string lpName, const std::string lpGuid
     if (!SetSystemEnviromentPrivilege())
         return false;
 
-    if (!SetFirmwareEnvironmentVariableA(lpName.c_str(), lpGuid.c_str(), buffer.data(), buffer.size())) {
+    if (!SetFirmwareEnvironmentVariableA(lpName.c_str(), lpGuid.c_str(), buffer.data(), static_cast<DWORD>(buffer.size()))) {
         std::cout << "Can't set new value to '" << lpName << "'" << std::endl;
         return false;
     }
