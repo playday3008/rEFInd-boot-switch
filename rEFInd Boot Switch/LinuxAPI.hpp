@@ -4,6 +4,8 @@
 #include <vector>
 
 #include <unistd.h>
+#include <sys/reboot.h>
+#include <linux/reboot.h>
 extern "C" {
 	#include <efivar/efivar.h>
 }
@@ -39,5 +41,15 @@ inline auto UpdatePrevBootVar(const std::string lpName, const std::string lpGuid
         return false;
     }
 
+    return true;
+}
+
+inline auto Reboot()
+{
+    sync();
+
+    if (reboot(LINUX_REBOOT_CMD_RESTART))
+        return false;
+				
     return true;
 }
